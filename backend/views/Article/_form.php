@@ -21,7 +21,7 @@ use backend\models\ArtCat;
     <?= $form->field($model, 'contenu')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'publie')->dropDownList(
-        array(['1'=>'Oui', '0' => 'Non']),
+        array(['0'=>'Oui', '1' => 'Non']),
         ['prompt' => 'Publier ?']
     ); ?>
 
