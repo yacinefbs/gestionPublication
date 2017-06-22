@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 
@@ -11,7 +11,7 @@ use Yii;
  * @property string $categorie
  * @property integer $id_art
  *
- * @property Article $idCat
+ * @property Article $idArt
  */
 class Categorie extends \yii\db\ActiveRecord
 {
@@ -32,7 +32,7 @@ class Categorie extends \yii\db\ActiveRecord
             [['categorie', 'id_art'], 'required'],
             [['id_art'], 'integer'],
             [['categorie'], 'string', 'max' => 30],
-            [['id_cat'], 'exist', 'skipOnError' => true, 'targetClass' => Article::className(), 'targetAttribute' => ['id_cat' => 'id_art']],
+            [['id_art'], 'exist', 'skipOnError' => true, 'targetClass' => Article::className(), 'targetAttribute' => ['id_art' => 'id_art']],
         ];
     }
 
@@ -51,8 +51,8 @@ class Categorie extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdCat()
+    public function getIdArt()
     {
-        return $this->hasOne(Article::className(), ['id_art' => 'id_cat']);
+        return $this->hasOne(Article::className(), ['id_art' => 'id_art']);
     }
 }

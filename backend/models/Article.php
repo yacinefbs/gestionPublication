@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 
@@ -15,7 +15,7 @@ use Yii;
  * @property integer $id_user
  *
  * @property User $idUser
- * @property Categorie $categorie
+ * @property Categorie[] $categories
  */
 class Article extends \yii\db\ActiveRecord
 {
@@ -68,8 +68,8 @@ class Article extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategorie()
+    public function getCategories()
     {
-        return $this->hasOne(Categorie::className(), ['id_cat' => 'id_art']);
+        return $this->hasMany(Categorie::className(), ['id_art' => 'id_art']);
     }
 }
