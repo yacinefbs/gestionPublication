@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id_art
  * @property string $titre
  * @property string $contenu
+ * @property string $date_art
  * @property integer $publie
  * @property string $file
  * @property integer $id_user
@@ -33,8 +34,9 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['titre', 'contenu', 'publie', 'file', 'id_user'], 'required'],
+            [['titre', 'contenu', 'date_art', 'publie', 'file', 'id_user'], 'required'],
             [['contenu'], 'string'],
+            [['date_art'], 'safe'],
             [['publie', 'id_user'], 'integer'],
             [['titre'], 'string', 'max' => 30],
             [['file'], 'string', 'max' => 255],
@@ -51,6 +53,7 @@ class Article extends \yii\db\ActiveRecord
             'id_art' => 'Id Art',
             'titre' => 'Titre',
             'contenu' => 'Contenu',
+            'date_art' => 'Date Art',
             'publie' => 'Publie',
             'file' => 'File',
             'id_user' => 'Id User',

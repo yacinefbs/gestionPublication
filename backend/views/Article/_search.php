@@ -21,9 +21,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'contenu') ?>
 
+    <?= $form->field($model, 'date_art') ?>
+
     <?= $form->field($model, 'publie') ?>
 
-    <?= $form->field($model, 'file') ?>
+    <?php // echo $form->field($model, 'file') ?>
 
     <?php // echo $form->field($model, 'id_user') ?>
 

@@ -4,8 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use backend\models\User;
-use backend\models\Categorie;
-use backend\models\ArtCat;
+use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Article */
@@ -14,14 +13,26 @@ use backend\models\ArtCat;
 
 <div class="article-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+   <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'titre')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'contenu')->textarea(['rows' => 6]) ?>
 
+    <?= $form->field($model, 'date_art')->widget(
+        DatePicker::className(), [
+            // inline too, not bad
+             'inline' => false, 
+             // modify template for custom rendering
+            //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+            'clientOptions' => [
+                'autoclose' => true,
+                'format' => 'yyyy-m-d'
+            ]
+    ]);?>
+
     <?= $form->field($model, 'publie')->dropDownList(
-        array(['1'=>'Oui', '0' => 'Non']),
+        array(['1'=>'Oui', '0' => 'Non', '9' => 'Supprimé']),
         ['prompt' => 'Publier ?']
     ); ?>
 

@@ -27,8 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'id_art',
             'titre',
             'contenu:ntext',
+            'date_art',
             'publie',
-            'file',
+            // 'file',
             // 'id_user',
 
             ['class' => 'yii\grid\ActionColumn'],

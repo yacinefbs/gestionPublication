@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id_art',
             'titre',
             'contenu:ntext',
+            'date_art',
             'publie',
             'file',
             'id_user',
