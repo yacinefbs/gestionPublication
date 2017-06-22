@@ -3,19 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Article;
-use backend\models\ArticleSearch;
+use backend\models\ArtCat;
+use backend\models\ArtCatSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
-use backend\models\ArtCat;
 
 
 /**
- * ArticleController implements the CRUD actions for Article model.
+ * ArtCatController implements the CRUD actions for ArtCat model.
  */
-class ArticleController extends Controller
+class ArtCatController extends Controller
 {
     /**
      * @inheritdoc
@@ -33,12 +31,12 @@ class ArticleController extends Controller
     }
 
     /**
-     * Lists all Article models.
+     * Lists all ArtCat models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ArticleSearch();
+        $searchModel = new ArtCatSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -48,47 +46,29 @@ class ArticleController extends Controller
     }
 
     /**
-     * Displays a single Article model.
-     * @param integer $id
+     * Displays a single ArtCat model.
+     * @param integer $id_art
+     * @param integer $id_cat
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($id_art, $id_cat)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id_art, $id_cat),
         ]);
     }
 
     /**
-     * Creates a new Article model.
+     * Creates a new ArtCat model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Article();
+        $model = new ArtCat();
 
-        if ($model->load(Yii::$app->request->post())) {
-        /*echo $model->titre.'<br />';
-        echo $model->contenu.'<br />';
-        echo $model->image.'<br />';
-        echo $model->publie.'<br />';
-        die(); 
-        */
-        //get the instance of the upload file
-        $imageName = $model->titre;
-        $model->file = UploadedFile::getInstance($model, 'file');
-        $model->file->saveAs('uploads/'.$imageName.'.'.$model->file->extension);
-
-        //Save the path in the db column
-        $model->file = 'uploads/'.$imageName.'.'.$model->file->extension;
-
-        $model->save();
-
-        
-
-        //if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_art]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id_art' => $model->id_art, 'id_cat' => $model->id_cat]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -97,17 +77,18 @@ class ArticleController extends Controller
     }
 
     /**
-     * Updates an existing Article model.
+     * Updates an existing ArtCat model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $id_art
+     * @param integer $id_cat
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id_art, $id_cat)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($id_art, $id_cat);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_art]);
+            return $this->redirect(['view', 'id_art' => $model->id_art, 'id_cat' => $model->id_cat]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -116,28 +97,30 @@ class ArticleController extends Controller
     }
 
     /**
-     * Deletes an existing Article model.
+     * Deletes an existing ArtCat model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $id_art
+     * @param integer $id_cat
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($id_art, $id_cat)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($id_art, $id_cat)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Article model based on its primary key value.
+     * Finds the ArtCat model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Article the loaded model
+     * @param integer $id_art
+     * @param integer $id_cat
+     * @return ArtCat the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($id_art, $id_cat)
     {
-        if (($model = Article::findOne($id)) !== null) {
+        if (($model = ArtCat::findOne(['id_art' => $id_art, 'id_cat' => $id_cat])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

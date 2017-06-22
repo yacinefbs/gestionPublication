@@ -14,8 +14,8 @@ use Yii;
  * @property string $file
  * @property integer $id_user
  *
+ * @property ArtCat[] $artCats
  * @property User $idUser
- * @property Categorie[] $categories
  */
 class Article extends \yii\db\ActiveRecord
 {
@@ -33,11 +33,11 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['titre', 'file', 'contenu', 'publie', 'file', 'id_user'], 'required'],
+            [['titre', 'contenu', 'publie', 'file', 'id_user'], 'required'],
             [['contenu'], 'string'],
             [['publie', 'id_user'], 'integer'],
             [['titre'], 'string', 'max' => 30],
-            [['file'], 'file'],
+            [['file'], 'string', 'max' => 255],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
         ];
     }
@@ -60,16 +60,16 @@ class Article extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdUser()
+    public function getArtCats()
     {
-        return $this->hasOne(User::className(), ['id' => 'id_user']);
+        return $this->hasMany(ArtCat::className(), ['id_art' => 'id_art']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategories()
+    public function getIdUser()
     {
-        return $this->hasMany(Categorie::className(), ['id_art' => 'id_art']);
+        return $this->hasOne(User::className(), ['id' => 'id_user']);
     }
 }

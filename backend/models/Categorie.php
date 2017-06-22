@@ -9,9 +9,8 @@ use Yii;
  *
  * @property integer $id_cat
  * @property string $categorie
- * @property integer $id_art
  *
- * @property Article $idArt
+ * @property ArtCat $idCat
  */
 class Categorie extends \yii\db\ActiveRecord
 {
@@ -29,10 +28,9 @@ class Categorie extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['categorie', 'id_art'], 'required'],
-            [['id_art'], 'integer'],
+            [['categorie'], 'required'],
             [['categorie'], 'string', 'max' => 30],
-            [['id_art'], 'exist', 'skipOnError' => true, 'targetClass' => Article::className(), 'targetAttribute' => ['id_art' => 'id_art']],
+            [['id_cat'], 'exist', 'skipOnError' => true, 'targetClass' => ArtCat::className(), 'targetAttribute' => ['id_cat' => 'id_cat']],
         ];
     }
 
@@ -44,15 +42,14 @@ class Categorie extends \yii\db\ActiveRecord
         return [
             'id_cat' => 'Id Cat',
             'categorie' => 'Categorie',
-            'id_art' => 'Id Art',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdArt()
+    public function getIdCat()
     {
-        return $this->hasOne(Article::className(), ['id_art' => 'id_art']);
+        return $this->hasOne(ArtCat::className(), ['id_cat' => 'id_cat']);
     }
 }

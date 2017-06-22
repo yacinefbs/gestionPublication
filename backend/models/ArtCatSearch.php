@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Categorie;
+use backend\models\ArtCat;
 
 /**
- * CategorieSearch represents the model behind the search form about `backend\models\Categorie`.
+ * ArtCatSearch represents the model behind the search form about `backend\models\ArtCat`.
  */
-class CategorieSearch extends Categorie
+class ArtCatSearch extends ArtCat
 {
     /**
      * @inheritdoc
@@ -18,8 +18,7 @@ class CategorieSearch extends Categorie
     public function rules()
     {
         return [
-            [['id_cat'], 'integer'],
-            [['categorie'], 'safe'],
+            [['id_art', 'id_cat'], 'integer'],
         ];
     }
 
@@ -41,7 +40,7 @@ class CategorieSearch extends Categorie
      */
     public function search($params)
     {
-        $query = Categorie::find();
+        $query = ArtCat::find();
 
         // add conditions that should always apply here
 
@@ -59,10 +58,9 @@ class CategorieSearch extends Categorie
 
         // grid filtering conditions
         $query->andFilterWhere([
+            'id_art' => $this->id_art,
             'id_cat' => $this->id_cat,
         ]);
-
-        $query->andFilterWhere(['like', 'categorie', $this->categorie]);
 
         return $dataProvider;
     }

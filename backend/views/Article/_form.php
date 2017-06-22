@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use backend\models\User;
+use backend\models\Categorie;
+use backend\models\ArtCat;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Article */
@@ -23,14 +25,13 @@ use backend\models\User;
         ['prompt' => 'Publier ?']
     ); ?>
 
-
-    <?= $form->field($model, 'file')->fileInput() ?>
-
-    
+   <?= $form->field($model, 'file')->fileInput() ?>
+   
     <?= $form->field($model, 'id_user')->dropDownList(
         ArrayHelper::map(User::find()->all(), 'id', 'username'),
         ['prompt' => 'Sélectionner user']
     ); ?>
+
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
