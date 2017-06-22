@@ -11,7 +11,7 @@ use Yii;
  * @property string $titre
  * @property string $contenu
  * @property integer $publie
- * @property string $image
+ * @property string $file
  * @property integer $id_user
  *
  * @property User $idUser
@@ -33,11 +33,11 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['titre', 'contenu', 'publie', 'image', 'id_user'], 'required'],
+            [['titre', 'file', 'contenu', 'publie', 'file', 'id_user'], 'required'],
             [['contenu'], 'string'],
             [['publie', 'id_user'], 'integer'],
             [['titre'], 'string', 'max' => 30],
-            [['image'], 'string', 'max' => 255],
+            [['file'], 'file'],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
         ];
     }
@@ -52,7 +52,7 @@ class Article extends \yii\db\ActiveRecord
             'titre' => 'Titre',
             'contenu' => 'Contenu',
             'publie' => 'Publie',
-            'image' => 'Image',
+            'file' => 'File',
             'id_user' => 'Id User',
         ];
     }

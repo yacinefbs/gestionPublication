@@ -45,9 +45,9 @@ class Evenement extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_eve' => 'Id Eve',
+            'id_eve' => 'Id Evenement',
             'description' => 'Description',
-            'date_eve' => 'Date Eve',
+            'date_eve' => 'Date Evenement',
             'contenu' => 'Contenu',
             'id_user' => 'Id User',
         ];
