@@ -42,7 +42,13 @@ use dosamigos\datepicker\DatePicker;
         ArrayHelper::map(User::find()->all(), 'id', 'username'),
         ['prompt' => 'Sélectionner user']
     ); ?>
+    
+    <?php  
+        $modelCats = ArrayHelper::map($modelCats, 'categorie', 'categorie');    
+    ?>
+    <?= $form->field($model, 'categories')->checkboxlist($modelCats);
 
+     ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

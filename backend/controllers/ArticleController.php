@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use backend\models\ArtCat;
+use backend\models\Categorie;  
 
 
 /**
@@ -20,7 +21,7 @@ class ArticleController extends Controller
     /**
      * @inheritdoc
      */
-    
+    //public $layout="mainLTE";
     public function behaviors()
     {
         return [
@@ -68,14 +69,12 @@ class ArticleController extends Controller
     public function actionCreate()
     {
         $model = new Article();
+        
+        $modelCats = Categorie::find()->all();
+
 
         if ($model->load(Yii::$app->request->post())) {
-        /*echo $model->titre.'<br />';
-        echo $model->contenu.'<br />';
-        echo $model->image.'<br />';
-        echo $model->publie.'<br />';
-        die(); 
-        */
+      
         //get the instance of the upload file
         $imageName = $model->titre;
         $model->file = UploadedFile::getInstance($model, 'file');
@@ -84,15 +83,26 @@ class ArticleController extends Controller
         //Save the path in the db column
         $model->file = 'uploads/'.$imageName.'.'.$model->file->extension;
 
+
         $model->save();
 
+        $listCategories = $_POST['createForm']['categories'];
+
         
+        foreach ($listCategories as $value) {
+            $newArtCat = new ArtCat();
+            $newArtCat->id_art = $model->id_art;
+            $newArtCat->id_cat = $value->id_cat;
+            $newArtCat->save();
+
+        }
 
         //if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id_art]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'modelCats' => $modelCats,
             ]);
         }
     }
