@@ -19,7 +19,7 @@ class PublicationSearch extends Publication
     {
         return [
             [['id_pub', 'id_client', 'id_user'], 'integer'],
-            [['titre', 'description', 'contenu', 'date_pub', 'image'], 'safe'],
+            [['titre', 'description', 'contenu', 'date_pub', 'file'], 'safe'],
         ];
     }
 
@@ -68,7 +68,7 @@ class PublicationSearch extends Publication
         $query->andFilterWhere(['like', 'titre', $this->titre])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'contenu', $this->contenu])
-            ->andFilterWhere(['like', 'image', $this->image]);
+            ->andFilterWhere(['like', 'file', $this->file]);
 
         return $dataProvider;
     }

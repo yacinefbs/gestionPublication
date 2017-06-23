@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'date_pub') ?>
 
-    <?php // echo $form->field($model, 'image') ?>
+    <?php // echo $form->field($model, 'file') ?>
 
     <?php // echo $form->field($model, 'id_client') ?>
 

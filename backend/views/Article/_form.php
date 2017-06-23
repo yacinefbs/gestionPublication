@@ -19,36 +19,28 @@ use dosamigos\datepicker\DatePicker;
 
     <?= $form->field($model, 'contenu')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'date_art')->widget(
-        DatePicker::className(), [
-            // inline too, not bad
-             'inline' => false, 
-             // modify template for custom rendering
-            //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
-            'clientOptions' => [
-                'autoclose' => true,
-                'format' => 'yyyy-m-d'
-            ]
-    ]);?>
+    
 
-    <?= $form->field($model, 'publie')->dropDownList(
-        array(['1'=>'Oui', '0' => 'Non', '9' => 'Supprimé']),
-        ['prompt' => 'Publier ?']
-    ); ?>
+     <?= $form->field($model, 'publie')->dropDownList(
+         array(['1'=>'Oui', '0' => 'Non', '9' => 'Supprimé']),
+         ['prompt' => 'Publier ?']
+     ); ?>
 
-   <?= $form->field($model, 'file')->fileInput() ?>
-   
+    <?= $form->field($model, 'file')->fileInput() ?>
+
+    <?php  
+        $modelCats = ArrayHelper::map($modelCats, 'categorie', 'categorie');    
+    ?>
+
+    <?= $form->field($model, 'categories')->checkboxlist($modelCats);
+
+     ?>
     <?= $form->field($model, 'id_user')->dropDownList(
         ArrayHelper::map(User::find()->all(), 'id', 'username'),
         ['prompt' => 'Sélectionner user']
     ); ?>
     
-    <?php  
-        $modelCats = ArrayHelper::map($modelCats, 'categorie', 'categorie');    
-    ?>
-    <?= $form->field($model, 'categories')->checkboxlist($modelCats);
-
-     ?>
+    
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

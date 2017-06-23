@@ -37,7 +37,7 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['titre', 'contenu', 'date_art', 'publie', 'file', 'id_user'], 'required'],
+            [['titre', 'contenu', 'date_art', 'publie', 'id_user'], 'required'],
             [['contenu'], 'string'],
             [['date_art'], 'safe'],
             [['publie', 'id_user'], 'integer'],
@@ -53,12 +53,13 @@ class Article extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_art' => 'Id Art',
+            'id_art' => 'Id Article',
             'titre' => 'Titre',
             'contenu' => 'Contenu',
-            'date_art' => 'Date Art',
-            'publie' => 'Publie',
-            'file' => 'File',
+            'date_art' => 'Date Article',
+            'publie' => 'Publier',
+            'file' => 'Image',
+            'categories' => 'Sélectionner les catégories',
             'id_user' => 'Id User',
         ];
     }

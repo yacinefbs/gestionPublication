@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Publication */
 
-$this->title = 'Update Publication: ' . $model->id_pub;
+$this->title = 'Modifier publication: ' . $model->id_pub;
 $this->params['breadcrumbs'][] = ['label' => 'Publications', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id_pub, 'url' => ['view', 'id' => $model->id_pub]];
 $this->params['breadcrumbs'][] = 'Update';

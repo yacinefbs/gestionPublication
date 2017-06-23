@@ -21,7 +21,7 @@ class ArticleController extends Controller
     /**
      * @inheritdoc
      */
-    //public $layout="mainLTE";
+    public $layout="mainLTE";
     public function behaviors()
     {
         return [
@@ -83,18 +83,27 @@ class ArticleController extends Controller
         //Save the path in the db column
         $model->file = 'uploads/'.$imageName.'.'.$model->file->extension;
 
+        $model->date_art = date('Y-m-d H:i:s', strtotime('-7 Hours'));
 
         $model->save();
 
-        $listCategories = $_POST['createForm']['categories'];
+        //var_dump($_POST);
+
+        //die();
+
 
         
+
+        $listCategories = $_POST['Article']['categories'];
+
         foreach ($listCategories as $value) {
+            $Categorie = Categorie::find()
+                ->where(['categorie' => $value])
+                ->one(); 
             $newArtCat = new ArtCat();
             $newArtCat->id_art = $model->id_art;
-            $newArtCat->id_cat = $value->id_cat;
+            $newArtCat->id_cat = $Categorie->id_cat;
             $newArtCat->save();
-
         }
 
         //if ($model->load(Yii::$app->request->post()) && $model->save()) {

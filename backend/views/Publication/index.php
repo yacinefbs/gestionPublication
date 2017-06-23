@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             'contenu:ntext',
             'date_pub',
-            // 'image:ntext',
+            // 'file:ntext',
             // 'id_client',
             // 'id_user',
 
