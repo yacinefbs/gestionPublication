@@ -10,6 +10,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 DashboardAsset::register($this);
@@ -120,6 +121,18 @@ DashboardAsset::register($this);
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
+          <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Client</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          <li class="active"><a href="<?= Url::to(['client/index']) ?> "><i class="fa  fa-eye"></i> Listes</a></li>
+            <li class="active"><a href="<?= Url::to(['client/create']) ?>"><i class="fa  fa-plus-circle"></i> Ajouter un Client</a></li>
+          </ul>
+        </li>
         <li class="active treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Article</span>
@@ -128,12 +141,46 @@ DashboardAsset::register($this);
             </span>
           </a>
           <ul class="treeview-menu">
-          <li class="active"><a href="http://localhost/yii/advanced2/backend/web/?r=article/"><i class="fa  fa-eye"></i> Listes</a></li>
-            <li class="active"><a href="http://localhost/yii/advanced2/backend/web/?r=article/create"><i class="fa  fa-plus-circle"></i> Ajouter un article</a></li>
-            <li><a href="#"><i class="fa fa-pencil"></i> Modifier un Article</a></li>
+          <li class="active"><a href="<?= Url::to(['article/index']) ?> "><i class="fa  fa-eye"></i> Listes</a></li>
+            <li class="active"><a href="<?= Url::to(['article/create']) ?>"><i class="fa  fa-plus-circle"></i> Ajouter un article</a></li>
           </ul>
         </li>
-        
+          <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Publication</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          <li class="active"><a href="<?= Url::to(['publication/index']) ?> "><i class="fa  fa-eye"></i> Listes</a></li>
+            <li class="active"><a href="<?= Url::to(['publication/create']) ?>"><i class="fa  fa-plus-circle"></i> Ajouter un Publication</a></li>
+          </ul>
+        </li>
+        <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Catégorie</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          <li class="active"><a href="<?= Url::to(['categorie/index']) ?> "><i class="fa  fa-eye"></i> Listes</a></li>
+            <li class="active"><a href="<?= Url::to(['categorie/create']) ?>"><i class="fa  fa-plus-circle"></i> Ajouter une catégorie</a></li>
+          </ul>
+        </li>
+        <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Evenement</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          <li class="active"><a href="<?= Url::to(['evenement/index']) ?> "><i class="fa  fa-eye"></i> Listes</a></li>
+            <li class="active"><a href="<?= Url::to(['evenement/create']) ?>"><i class="fa  fa-plus-circle"></i> Ajouter un événement</a></li>
+          </ul>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->

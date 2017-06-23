@@ -32,10 +32,11 @@ use backend\models\User;
 
     <?= $form->field($model, 'contenu')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'id_user')->dropDownList(
+    <!-- <?= $form->field($model, 'id_user')->dropDownList(
         ArrayHelper::map(User::find()->all(), 'id', 'username'),
         ['prompt' => 'Sélectionner user']
     ); ?>
+    -->
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

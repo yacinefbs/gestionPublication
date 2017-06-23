@@ -69,6 +69,7 @@ class ArticleController extends Controller
     public function actionCreate()
     {
         $model = new Article();
+
         
         $modelCats = Categorie::find()->all();
 
@@ -83,17 +84,13 @@ class ArticleController extends Controller
         //Save the path in the db column
         $model->file = 'uploads/'.$imageName.'.'.$model->file->extension;
 
-        $model->date_art = date('Y-m-d H:i:s', strtotime('-7 Hours'));
-
+        $model->date_art = date('Y-m-d H:i:s');
+        $model->id_user = Yii::$app->user->getId(); 
         $model->save();
 
         //var_dump($_POST);
 
         //die();
-
-
-        
-
         $listCategories = $_POST['Article']['categories'];
 
         foreach ($listCategories as $value) {
@@ -125,12 +122,38 @@ class ArticleController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model2 = ArtCat::findBySql('SELECT * FROM art_cat where id_art='.$id)->all();
+        //$modelCats = Categorie::find()->all();
+        $modelCats = Categorie::findBySql('SELECT * FROM categorie')->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            //get the instance of the upload file
+            $imageName = $model->titre;
+            $model->file = UploadedFile::getInstance($model, 'file');
+            $model->file->saveAs('uploads/'.$imageName.'.'.$model->file->extension);
+
+            //Save the path in the db column
+            $model->file = 'uploads/'.$imageName.'.'.$model->file->extension;
+
+            $model->date_art = date('Y-m-d H:i:s');
+            $model->save();
+
+           // $categoriesASupp = ArtCat::find($model->id_art);
+            //$categoriesASupp->delete();
+
+            //$deleteall = ArtCat::find(['id_art'=>$id_art])->all();
+            //foreach($deleteall as $delete)
+            //{
+            //    $delete->delete();
+            //}
+
             return $this->redirect(['view', 'id' => $model->id_art]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'model2' => $model2,
+                'modelCats' => $modelCats,
             ]);
         }
     }

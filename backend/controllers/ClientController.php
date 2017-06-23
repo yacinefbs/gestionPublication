@@ -17,6 +17,7 @@ class ClientController extends Controller
     /**
      * @inheritdoc
      */
+    public $layout="mainLTE";
     public function behaviors()
     {
         return [

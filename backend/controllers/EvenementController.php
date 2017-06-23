@@ -17,6 +17,7 @@ class EvenementController extends Controller
     /**
      * @inheritdoc
      */
+    public $layout="mainLTE";
     public function behaviors()
     {
         return [
@@ -65,7 +66,9 @@ class EvenementController extends Controller
     {
         $model = new Evenement();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->id_user = Yii::$app->user->getId(); 
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id_eve]);
         } else {
             return $this->render('create', [

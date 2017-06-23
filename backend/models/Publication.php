@@ -12,7 +12,7 @@ use Yii;
  * @property string $description
  * @property string $contenu
  * @property string $date_pub
- * @property string $image
+ * @property string $file
  * @property integer $id_client
  * @property integer $id_user
  *
@@ -35,9 +35,9 @@ class Publication extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['titre', 'description', 'contenu', 'date_pub', 'image', 'id_client', 'id_user'], 'required'],
-            [['description', 'contenu', 'image'], 'string'],
-            [['date_pub'], 'safe'],
+            [['titre', 'description', 'contenu', 'date_pub', 'id_client', 'id_user'], 'required'],
+            [['description', 'contenu'], 'string'],
+            [['date_pub'], 'checkDate'],
             [['id_client', 'id_user'], 'integer'],
             [['titre'], 'string', 'max' => 255],
             [['id_client'], 'exist', 'skipOnError' => true, 'targetClass' => Client::className(), 'targetAttribute' => ['id_client' => 'id_clt']],
@@ -56,7 +56,7 @@ class Publication extends \yii\db\ActiveRecord
             'description' => 'Description',
             'contenu' => 'Contenu',
             'date_pub' => 'Date Pub',
-            'image' => 'Image',
+            'file' => 'File',
             'id_client' => 'Id Client',
             'id_user' => 'Id User',
         ];
@@ -65,7 +65,7 @@ class Publication extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdClient()
+    public function getClient()
     {
         return $this->hasOne(Client::className(), ['id_clt' => 'id_client']);
     }
@@ -77,4 +77,18 @@ class Publication extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'id_user']);
     }
+
+
+
+    public function checkDate($attribute,$params){
+        $today = date('Y-m-d');
+        $selectedDate = date($this->date_pub);
+        if($selectedDate < $today)
+        {   
+
+            $this->addError($attribute,'Date Must be bigger '.$selectedDate.' . '.$today);
+            //return false;
+        }
+    }
+
 }

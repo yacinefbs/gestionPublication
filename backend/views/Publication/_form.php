@@ -2,10 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-use backend\models\User;
+use kartik\select2\Select2;
 use backend\models\Client;
-use dosamigos\datepicker\DatePicker;
+use yii\helpers\ArrayHelper;
+use kartik\date\DatePicker;
+
+
 /* @var $this yii\web\View */
 /* @var $model backend\models\Publication */
 /* @var $form yii\widgets\ActiveForm */
@@ -21,27 +23,25 @@ use dosamigos\datepicker\DatePicker;
 
     <?= $form->field($model, 'contenu')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'date_pub')->widget(
-        DatePicker::className(), [
-            // inline too, not bad
-             'inline' => false, 
-             // modify template for custom rendering
-            //'template' => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
-            'clientOptions' => [
-                'autoclose' => true,
-                'format' => 'yyyy-m-d'
-            ]
-    ]);?>
+    <?=  $form->field($model, 'date_pub')->widget(DatePicker::className(),[
 
-    <?= $form->field($model, 'id_client')->dropDownList(
-        ArrayHelper::map(Client::find()->all(), 'id_clt', 'nom'),
-        ['prompt' => 'Sélectionner user']
-    ); ?>
+    'name' => 'check_issue_date', 
+    
+    'options' => ['placeholder' => 'Select issue date ...'],
+    'pluginOptions' => [
+        'format' => 'yyyy-mm-dd',
+        'todayHighlight' => true
+    ]
+]);?>
+    <?= $form->field($model, 'file')->fileInput() ?>
 
-    <?= $form->field($model, 'id_user')->dropDownList(
-        ArrayHelper::map(User::find()->all(), 'id', 'username'),
-        ['prompt' => 'Sélectionner user']
-    ); ?>
+<!--     <?= $form->field($model, 'id_client')->textInput() ?>
+     -->    <?=
+         $form->field($model, 'id_client')->DropDownList(
+            ArrayHelper::map(Client::find()->all(),'id_clt','nom'),
+            ['promot'=>'select Client']
+            )->label('Client ');
+?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

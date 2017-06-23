@@ -6,11 +6,11 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\Publication;
-
+use backend\models\Client;
 /**
- * PublicationSearch represents the model behind the search form about `backend\models\Publication`.
+ * SearchPublication represents the model behind the search form about `backend\models\Publication`.
  */
-class PublicationSearch extends Publication
+class SearchPublication extends Publication
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class PublicationSearch extends Publication
     public function rules()
     {
         return [
-            [['id_pub', 'id_client', 'id_user'], 'integer'],
-            [['titre', 'description', 'contenu', 'date_pub', 'image'], 'safe'],
+            [['id_pub', 'id_user'], 'integer'],
+            [['titre','id_client', 'description', 'contenu', 'date_pub', 'file'], 'safe'],
         ];
     }
 
@@ -56,19 +56,19 @@ class PublicationSearch extends Publication
             // $query->where('0=1');
             return $dataProvider;
         }
-
+        $query->joinWith('client');
         // grid filtering conditions
         $query->andFilterWhere([
             'id_pub' => $this->id_pub,
             'date_pub' => $this->date_pub,
-            'id_client' => $this->id_client,
+            
             'id_user' => $this->id_user,
         ]);
 
         $query->andFilterWhere(['like', 'titre', $this->titre])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'contenu', $this->contenu])
-            ->andFilterWhere(['like', 'image', $this->image]);
+            ->andFilterWhere(['like', 'nom', $this->id_client]);
 
         return $dataProvider;
     }

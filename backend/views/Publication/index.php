@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\PublicationSearch */
+/* @var $searchModel backend\models\SearchPublication */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Publications';
@@ -25,12 +25,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id_pub',
+            [
+             'attribute'=>'id_client',
+             'value'=>'client.nom',
+             'label'=>"Client"
+             ],
             'titre',
             'description:ntext',
             'contenu:ntext',
             'date_pub',
             // 'file:ntext',
-            // 'id_client',
+
             // 'id_user',
 
             ['class' => 'yii\grid\ActionColumn'],

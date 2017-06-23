@@ -24,20 +24,20 @@ class DashboardAsset extends AssetBundle
 
     ];
     public $js = [
-        'dist/js/jquery-3.2.1.min.js',
-        'https://code.jquery.com/ui/1.11.4/jquery-ui.min.js',
+       //  'https://code.jquery.com/jquery-2.2.4.min.js',
+       // 'https://code.jquery.com/ui/1.11.4/jquery-ui.min.js',
 
-        'https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',
+       //  'https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',
 
-        'dist/js/bootstrap.min.js',
-        'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js',
+       //  'dist/js/bootstrap.min.js',
+       //  'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js',
 
-        'plugins/slimScroll/jquery.slimscroll.min.js',
-        'plugins/fastclick/fastclick.js',
+       //  'plugins/slimScroll/jquery.slimscroll.min.js',
+       //  'plugins/fastclick/fastclick.js',
 
-        'dist/js/adminlte.min.js',
-        'dist/js/pages/dashboard.js',
-        'dist/js/demo.js',
+       //  'dist/js/adminlte.min.js',
+       //  'dist/js/pages/dashboard.js',
+       //  'dist/js/demo.js',
 
     ];
     public $depends = [
